@@ -19,7 +19,7 @@ class LongestwordgameController < ApplicationController
     @response = ''
     @my_word = params[:myword]
     @the_letters = params[:theletters]
-    return @response = 'Please enter a word next time' if @my_word == ''
+    return @response = 'Please enter a word next time' || store_score(0) if @my_word == ''
 
     if included?(@my_word, @the_letters)
       if valid_word?(@my_word)
@@ -49,9 +49,8 @@ class LongestwordgameController < ApplicationController
   private
 
   def store_score(score)
-    session[:score] = score.to_i
     session[:total_score] = 0 if session[:total_score].nil?
-    session[:total_score] += session[:score]
+    session[:total_score] += score.to_i
   end
 
 end
