@@ -2,14 +2,14 @@
 
 <div class="rowletters" style="display: flex;">
   <% @letters.each do |letter| %>
-  <div class="letter" style="background: blue; color: white; padding: 10px; margin: 8px; font-size:30px; font-family:monospace;">
+  <div class="letter" style="background: #1e81b0; color: white; padding: 10px; margin: 8px; font-size:30px; font-family:monospace; border-radius:8px;">
     <%= letter %>
   </div>
     <% end %>
 </div>
 
 
-<form action="/score">
+<form action="/score" method="post">
 <p>What is the longest word you can find?</p>
 <input type="text" value="" name="myword">
 <input type="submit" value="Score my answer!" id="submitbutton">

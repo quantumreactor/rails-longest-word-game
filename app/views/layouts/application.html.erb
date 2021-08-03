@@ -10,6 +10,11 @@
   </head>
 
   <body>
+    <div id="navigationbar" style="background: #eeeee4; padding: 16px;"> 
+  <%= link_to 'Inicio', root_path %> &nbsp;
+  <%= link_to 'Longest word', new_path %> &nbsp;
+  </div>
+
     <%= yield %>
   </body>
 </html>

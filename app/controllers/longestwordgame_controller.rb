@@ -2,6 +2,7 @@ require 'open-uri'
 require 'json'
 
 class LongestwordgameController < ApplicationController
+
   def start
 
   end
@@ -14,31 +15,23 @@ class LongestwordgameController < ApplicationController
     @letters
   end
 
-#   {
-#     "found": true,
-#     "word": "palabra",
-#     "length": 7
-# }
-#  {
-# "found": false,
-# "word": "zzzz",
-# "error": "word not found"
-
-# }
-
-
   def score
     @response = ''
     @my_word = params[:myword]
     @the_letters = params[:theletters]
+    return @response = 'Please enter a word next time' if @my_word == ''
+
     if included?(@my_word, @the_letters)
       if valid_word?(@my_word)
         @response = "Congratulations! #{@my_word} is a valid word!"
+        store_score(5)
       else
-        @response = "Sorry but #{@my_word} can not be built ouf of #{@the_letters}"
+        @response = "Defeat! Sorry, but #{@my_word} does not seem to be a valid word."
+        store_score(-3)
       end
     else
-      @response = "sorry, but #{@my_word} does not seem to be a valid word."
+      @response = "Sorry but #{@my_word} can not be built ouf of #{@the_letters}"
+      store_score(-5)
     end
     @response
   end
@@ -51,6 +44,13 @@ class LongestwordgameController < ApplicationController
 
   def included?(guess, grid)
     guess.chars.all? { |letter| guess.count(letter) <= grid.count(letter) }
+  end
+
+  private
+
+  def store_score(score)
+    session[:score] = score.to_i
+    session[:total_score] += session[:score]
   end
 
 end

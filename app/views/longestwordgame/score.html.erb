@@ -1,6 +1,9 @@
 <h1> Result </h1>
 
-<% #can word be built from letters? %>
 <p> <%= @response %></p>
+<p> This turn's score: <strong><%= session[:score] %> </strong></p>
+<p> Total score so far: <strong> <%= session[:total_score] %> </strong></p>
+
+<%= link_to 'New game', new_path %>
 
 
