@@ -19,7 +19,11 @@ class LongestwordgameController < ApplicationController
     @response = ''
     @my_word = params[:myword]
     @the_letters = params[:theletters]
-    return @response = 'Please enter a word next time' || store_score(0) if @my_word == ''
+    
+    if @my_word == ''
+      store_score(0)
+      return @response = 'Please enter a word next time'
+    end
 
     if included?(@my_word, @the_letters)
       if valid_word?(@my_word)
