@@ -50,6 +50,7 @@ class LongestwordgameController < ApplicationController
 
   def store_score(score)
     session[:score] = score.to_i
+    session[:total_score] = 0 if session[:total_score].nil?
     session[:total_score] += session[:score]
   end
 
